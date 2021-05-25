@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Card, Paragraph, Avatar} from 'react-native-paper';
+import {Card,  Avatar} from 'react-native-paper';
 
-const News = React.memo(props => {
+const Jobs = React.memo(props => {
     return (
         <View style={styles.container}>
             <Card>
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
         flex: 1,
     }
 });
-export default  News
+export default  Jobs;

@@ -4,7 +4,7 @@ import Header from '../ReuseableComponents/Header';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchData} from '../../Redux/Action';
 import {ActivityIndicator} from 'react-native-paper';
-import News from '../ReuseableComponents/News';
+import Jobs from '../ReuseableComponents/Jobs';
 
 const HomeScreen = props => {
     const windowWidth = Dimensions.get('window').width;
@@ -42,7 +42,7 @@ const HomeScreen = props => {
                         {loading && <ActivityIndicator animating={true} color="#00c795" />}
                     </View>
                 }
-                renderItem={({item, index}) => <News {...props} item={item} key={item.id} />}
+                renderItem={({item, index}) => <Jobs {...props} item={item} key={item.id} />}
             />
         </View>
     );
