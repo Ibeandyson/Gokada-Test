@@ -3,11 +3,10 @@ import {View, Text, StyleSheet} from 'react-native';
 import {Avatar} from 'react-native-paper';
 import Header from '../ReuseableComponents/Header';
 
-const AboutScreen = () => {
+const AboutScreen = props => {
     return (
         <View>
-            <Header />
-
+            <Header {...props} />
             <View style={styles.container}>
                 <Avatar.Image size={200} source={require('../../assets/ceo.png')} />
                 <Text style={{marginTop: '5%', fontSize: 20, fontWeight: 'bold'}}>Fahim Saleh</Text>
@@ -34,7 +33,7 @@ const AboutScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: "80%",
+        marginTop: '80%',
         alignItems: 'center',
         justifyContent: 'center'
     }

@@ -1,8 +1,6 @@
 import {DATA_REQUEST, DATA_REQUEST_SUCCESS, DATA_REQUEST_FAIL} from './Types';
 import axios from "axios"
 
-
-
 export const fetchData = () =>   {
   return (dispatch) =>  {
     dispatch({ type: DATA_REQUEST });

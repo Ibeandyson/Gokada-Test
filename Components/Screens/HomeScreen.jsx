@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, Image, Dimensions, ScrollView, FlatList} from 'react-native';
 import Header from '../ReuseableComponents/Header';
 import {useDispatch, useSelector} from 'react-redux';
@@ -9,7 +9,7 @@ import News from '../ReuseableComponents/News';
 const HomeScreen = props => {
     const windowWidth = Dimensions.get('window').width;
     const newsData = useSelector(state => state.newsData);
-    const {news} = newsData;
+    const {news, loading} = newsData;
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -17,46 +17,33 @@ const HomeScreen = props => {
             dispatch(fetchData());
         }
     }, []);
-    if (news) {
-       
-        console.log('my news', news);
-    }
-    
 
     return (
         <View style={styles.container}>
+            <Header {...props} />
             <FlatList
                 style={{flex: 1, width: windowWidth}}
                 data={news !== null ? news : null}
                 initialNumToRender={15}
                 keyExtractor={item => item.id}
-                ListHeaderComponent={<TopPage />}
+                ListHeaderComponent={
+                    <View style={styles.container}>
+                        <View>
+                            <Image
+                                style={{height: windowWidth, width: windowWidth}}
+                                size={40}
+                                source={require('../../assets/g.jpeg')}
+                            />
+                        </View>
+                        <Text
+                            style={{marginTop: '10%', fontSize: 30, fontWeight: 'bold', padding: 10, color: '#00c795'}}>
+                            Jobs
+                        </Text>
+                        {loading && <ActivityIndicator animating={true} color="#00c795" />}
+                    </View>
+                }
                 renderItem={({item, index}) => <News {...props} item={item} key={item.id} />}
             />
-        </View>
-    );
-};
-
-const TopPage = (props) => {
-    const windowWidth = Dimensions.get('window').width;
-    const newsData = useSelector(state => state.newsData);
-    const {loading} = newsData;
-    return (
-        <View style={styles.container}>
-            <Header {...props} />
-            {/* <ScrollView showsVerticalScrollIndicator={false}> */}
-            <View>
-                <Image
-                    style={{height: windowWidth, width: windowWidth}}
-                    size={40}
-                    source={require('../../assets/bike.jpg')}
-                />
-            </View>
-            <Text style={{marginTop: '10%', fontSize: 30, fontWeight: 'bold', padding: 10, color: '#00c795'}}>
-                Jobs
-            </Text>
-            {loading ? <ActivityIndicator animating={true} color="#00c795" /> : null}
-            {/* </ScrollView> */}
         </View>
     );
 };
